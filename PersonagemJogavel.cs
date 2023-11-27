@@ -8,13 +8,13 @@ namespace TrabalhoFinal
 {
     class PersonagemJogavel : Personagem
     {
-        public List<Item> Items = new List<Item>();
+        public List<Item> Itens = new List<Item>();
 
         public override void Movimentar(float posX, float posY, float posZ)
         {
             //TODO
         }
-
+        
         public void InitPersonagem()
         {
             Helper.HeaderText("COMPLETE AS SEGUINTES INFORMAÇÕES");
@@ -36,14 +36,14 @@ namespace TrabalhoFinal
 
         public void MostrarItems()
         {
-            if (Items.Count == 0)
+            if (Itens.Count == 0)
             {
                 Console.WriteLine("Este personagem não possui nenhum item!");
             }
             else
             {
                 Console.WriteLine("==== ITEMS ====");
-                foreach(Item item in Items)
+                foreach(Item item in Itens)
                 {
                     Console.WriteLine($"Nome: {item.Nome} | Tipo: {item.Tipo} | Preço: {item.Preco} ");
                 }

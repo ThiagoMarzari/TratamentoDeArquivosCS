@@ -35,7 +35,8 @@ namespace TrabalhoFinal
 
         public string PegarCaracteristicas()
         {
-            return Nome + ";" + Forca + ";" + Estamina + ";" + Agilidade + ";" + Inteligencia + ";" + Carisma;
+            return Nome + ";" + Forca + ";" + Estamina + ";" + Agilidade + ";" + Inteligencia + ";" + Carisma + 
+                ";" + PosX + ";" + PosY + ";" + PosZ;
         }
     }
 }

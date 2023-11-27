@@ -8,7 +8,7 @@ namespace TrabalhoFinal
 {
     internal class Arquivo
     {
-        string nome, mensagem;
+        string nome;
         StreamWriter sw;
         StreamReader sr;
 

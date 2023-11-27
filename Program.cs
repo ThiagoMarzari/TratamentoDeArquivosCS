@@ -27,9 +27,10 @@
                 Console.WriteLine("1 - Adicionar para ler personagens jogáveis: "); 
                 Console.WriteLine("2 - Para mostrar os personagens da lista: ");
                 Console.WriteLine("3 - Adicionar itens para um personagem: ");
+                Console.WriteLine("4 - Para fechar o programa: ");
                 op = int.Parse(Console.ReadLine());
 
-                if (op == 1) 
+                if (op == 1) //Adiconar personagens na lista
                 {
                     arquivoP.CriaArquivo();
                     PersonagemJogavel p = new PersonagemJogavel(); 
@@ -40,31 +41,39 @@
                     arquivoP.FecharArquivo();
                     listaPersonagens.Add(p);
                 }
-                else if (op == 2)
+                else if (op == 2) //Mostrar personagens da lista
                 {
                     Console.Clear();
                     Helper.HeaderText("LISTA DE PERSONAGENS");
-
-                    if (listaPersonagens.Count == 0)
+                    try //Tentando fazer código abaixo, caso der algo errado ele vai para o catch
                     {
-                        Console.WriteLine("Lista vazia!");
-                        Helper.ContinueMessage();
-                        continue;
+                        string[] vetorPerso = arquivoP.LerTodasLinhas();
+                        Console.WriteLine(vetorPerso.Length);
+
+                        for (int i = 0; i < vetorPerso.Length; i++)
+                        {
+                            string[] aux = vetorPerso[i].Split(';');
+
+                            Console.Write("Nome: " + aux[0] + "|"); 
+                            Console.Write("Força: " + aux[1] + "|");
+                            Console.Write("Estamina:" + aux[2] + "|");
+                            Console.Write("Agilidade:" + aux[3] + "|");
+                            Console.Write("Inteligência:" + aux[4] + "|");
+                            Console.Write("Carisma:" + aux[5] + "|");
+
+                            Console.WriteLine();
+                        }
                     }
-
-                    foreach (PersonagemJogavel personagem in listaPersonagens)
+                    catch (Exception ex)
                     {
-                        Console.WriteLine("Nome do personagem: " + personagem.Nome);
-                        Console.WriteLine("Força do personagem: " + personagem.Forca);
-                        Console.WriteLine("Estamina do personagem: " + personagem.Estamina);
-                        personagem.MostrarItems();
-                        Console.WriteLine();
+                        Console.WriteLine("Ocorreu um erro: Lista Vazia!");
                     }
                     Console.WriteLine("--------------------------");
                     Helper.ContinueMessage();
                 }
-                else if (op == 3)
+                else if (op == 3) //Adicionar itens para o personagem
                 {
+
                     if (listaPersonagens.Count == 0)
                     {
                         Console.WriteLine("Lista vazia!");
@@ -109,7 +118,7 @@
                         float preco = float.Parse(Console.ReadLine());
                         Item item = new Item(nome, tipo, preco);
 
-                        p.Items.Add(item);
+                        p.Itens.Add(item);
 
                         Console.WriteLine("Continuar adicionando mais itens? [SIM] [NAO]");
                         String bOp = Console.ReadLine();
@@ -119,6 +128,10 @@
                         }
                         continue;
                     }
+                }
+                else if (op == 4)
+                {
+                    break;
                 }
             }
         }

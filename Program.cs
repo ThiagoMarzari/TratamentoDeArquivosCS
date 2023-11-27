@@ -1,21 +1,22 @@
-﻿namespace TrabalhoFinal
+﻿using System.Runtime.ConstrainedExecution;
+
+namespace TrabalhoFinal
 {
     internal class Program
     {
         static void Main(string[] args)
         {
             string nomeArquivoP, nomeArquivoI;
-            string mensagem; //Mensagem para armazenar no arquivo txt
 
             Console.WriteLine("Digite o nome do arquivo para os personagens: ");
             nomeArquivoP = Console.ReadLine();
-            Arquivo arquivoP = new Arquivo(nomeArquivoP);
+            Arquivo arquivoP = new Arquivo("P",nomeArquivoP);
 
-            //Console.WriteLine("Digite o nome do arquivo para os itens: ");
-            //nomeArquivoI = Console.ReadLine();
-            //Arquivo arquivoI = new Arquivo(nomeArquivoI);
+            Console.WriteLine("Digite o nome do arquivo para os itens: ");
+            nomeArquivoI = Console.ReadLine();
+            Arquivo arquivoI = new Arquivo("I", nomeArquivoI);
 
-            List<Item> items = new List<Item>();
+            List<Item> listaItens = new List<Item>();
             List<Personagem> listaPersonagens = new List<Personagem>();
 
             int op;
@@ -24,24 +25,38 @@
             while (true)
             {
                 Helper.HeaderText("MENU");
-                Console.WriteLine("1 - Adicionar para ler personagens jogáveis: "); 
-                Console.WriteLine("2 - Para mostrar os personagens da lista: ");
-                Console.WriteLine("3 - Adicionar itens para um personagem: ");
-                Console.WriteLine("4 - Para fechar o programa: ");
+                Console.WriteLine("1 - Adicionar para ler personagens jogáveis: ");
+                Console.WriteLine("2 - Para adicionar itens na lista:  ");
+                Console.WriteLine("3 - Para mostrar os personagens da lista: ");
+                Console.WriteLine("4 - Adicionar itens para um personagem: ");
+                Console.WriteLine("5 - Para fechar o programa: ");
                 op = int.Parse(Console.ReadLine());
 
                 if (op == 1) //Adiconar personagens na lista
                 {
-                    arquivoP.CriaArquivo();
-                    PersonagemJogavel p = new PersonagemJogavel(); 
-                    p.InitPersonagem();
+                    string mensagem;
+                    PersonagemJogavel p = new PersonagemJogavel();
 
-                    mensagem = p.PegarCaracteristicas();
+                    arquivoP.CriaArquivo();
+                    p.InitPersonagem();
+                    mensagem = p.GetInfos();
                     arquivoP.GravaMensagem(mensagem);
                     arquivoP.FecharArquivo();
                     listaPersonagens.Add(p);
                 }
-                else if (op == 2) //Mostrar personagens da lista
+                else if (op == 2) //Adicionar itens na lista
+                {
+                    string mensagem;
+                    Item auxItem = new Item();
+
+                    arquivoI.CriaArquivo();
+                    auxItem.Init();
+                    mensagem = auxItem.GetInfos();
+                    arquivoI.GravaMensagem(mensagem);
+                    arquivoI.FecharArquivo();
+                    listaItens.Add(auxItem);
+                }
+                else if (op == 3) //Mostrar personagens da lista
                 {
                     Console.Clear();
                     Helper.HeaderText("LISTA DE PERSONAGENS");
@@ -71,7 +86,7 @@
                     Console.WriteLine("--------------------------");
                     Helper.ContinueMessage();
                 }
-                else if (op == 3) //Adicionar itens para o personagem
+                else if (op == 4) //Adicionar itens para o personagem
                 {
 
                     if (listaPersonagens.Count == 0)
@@ -81,7 +96,7 @@
                         continue; //Volta para o inicio do loop
                     }
 
-                    Console.WriteLine("Escolha qual dos personagens");
+                    Console.WriteLine("Escolha qual dos personagens: ");
                     foreach(Personagem per in listaPersonagens)
                     {
                         Console.WriteLine("NOME: " + per.Nome);
@@ -109,16 +124,31 @@
                     Console.WriteLine("Adicone items a este personagem");
                     while(true)
                     {
-                        //To Do - Adiconar items para o personagem jogavel
-                        Console.WriteLine("Digite o nome do item: ");
-                        string nome = Console.ReadLine();
-                        Console.WriteLine("Digite o tipo do item: ");
-                        string tipo = Console.ReadLine();
-                        Console.WriteLine("Digite o preço do item: ");
-                        float preco = float.Parse(Console.ReadLine());
-                        Item item = new Item(nome, tipo, preco);
+                        //TODO ADICIONAR ITENS
+                        Console.WriteLine("Escolha qual dos itens: ");
+                        foreach (Item item in listaItens)
+                        {
+                            Console.WriteLine("NOME: " + item.Nome);
+                        }
 
-                        p.Itens.Add(item);
+                        String itemOp = Console.ReadLine();
+                        Item i = new Item(); //Variavel local para armazenar o personagem escolhido;
+                        foreach (Item item in listaItens)
+                        {
+                            if (itemOp.Equals(item.Nome))
+                            {
+                                p.Itens.Add(i);
+                                break;
+                            }
+                            else p = null;
+
+                        }
+                        if (p == null)
+                        {
+                            Console.WriteLine("Nome não encontrado!");
+                            Helper.ContinueMessage();
+                            continue;
+                        }
 
                         Console.WriteLine("Continuar adicionando mais itens? [SIM] [NAO]");
                         String bOp = Console.ReadLine();
@@ -129,7 +159,7 @@
                         continue;
                     }
                 }
-                else if (op == 4)
+                else if (op == 5)
                 {
                     break;
                 }

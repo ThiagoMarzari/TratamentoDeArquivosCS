@@ -8,18 +8,19 @@ namespace TrabalhoFinal
 {
     internal class Arquivo
     {
-        string nome;
+        string nome, prefixo;
         StreamWriter sw;
         StreamReader sr;
 
-        public Arquivo(string nome)
+        public Arquivo(string nome, string prefixo)
         {
             this.nome = nome;
+            this.prefixo = prefixo;
         }
 
         public void CriaArquivo()
         {
-            sw = new StreamWriter("C:\\Arquivos\\" + nome + ".txt", true, Encoding.UTF8);
+            sw = new StreamWriter("C:\\Arquivos\\" + nome +prefixo + ".txt", true, Encoding.UTF8);
         }
 
         public void lerArquivo()

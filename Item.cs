@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrabalhoFinal
 {
-    public class Item
+    public class Item : IGetInfo
     {
         private string _nome;
         private string _tipo;
@@ -16,11 +16,19 @@ namespace TrabalhoFinal
         public string Tipo { get => _tipo; }
         public float Preco { get => _preco; }
 
-        public Item(string nome, string tipo, float preco)
+        public void Init()
         {
-            _nome = nome;
-            _tipo = tipo;
-            _preco = preco;
+            Console.WriteLine("Digite o nome do item: ");
+            _nome = Console.ReadLine();
+            Console.WriteLine("Digite o tipo do item: ");
+            _tipo = Console.ReadLine();
+            Console.WriteLine("Digite o preço do item: ");
+            _preco = float.Parse(Console.ReadLine());
+        }
+
+        public string GetInfos()
+        {
+            return Nome + ";" + Tipo + ";" + Preco;
         }
     }
 }

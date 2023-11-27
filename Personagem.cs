@@ -6,7 +6,7 @@ using System.Threading.Tasks;
 
 namespace TrabalhoFinal
 {
-    public abstract class Personagem
+    public abstract class Personagem : IGetInfo
     {
         private string _nome;
         private int _forca;
@@ -33,9 +33,9 @@ namespace TrabalhoFinal
 
         public abstract void Movimentar(float posX, float posY, float posZ); //Não possui implementação por ser um método abstrato
 
-        public string PegarCaracteristicas()
+        public string GetInfos()
         {
-            return Nome + ";" + Forca + ";" + Estamina + ";" + Agilidade + ";" + Inteligencia + ";" + Carisma + 
+            return Nome + ";" + Forca + ";" + Estamina + ";" + Agilidade + ";" + Inteligencia + ";" + Carisma +
                 ";" + PosX + ";" + PosY + ";" + PosZ;
         }
     }

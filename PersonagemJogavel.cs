@@ -15,23 +15,18 @@ namespace TrabalhoFinal
             //TODO
         }
         
-        public void Init()
-        {
-            Helper.HeaderText("COMPLETE AS SEGUINTES INFORMAÇÕES");
 
-            Console.WriteLine("Digite o nome: ");
-            Nome = Console.ReadLine();
-            Console.WriteLine("Digite a força: ");
-            Forca = int.Parse(Console.ReadLine());
-            Console.WriteLine("Digite a estamina: ");
-            Estamina = int.Parse(Console.ReadLine());
-            Console.WriteLine("Digite a agilidade: ");
-            Agilidade = int.Parse(Console.ReadLine());
-            Console.WriteLine("Digite a inteligência: ");
-            Inteligencia = int.Parse(Console.ReadLine());
-            Console.WriteLine("Digite a carisma: ");
-            Carisma = int.Parse(Console.ReadLine());
+        public void Init() 
+        {
+            base.Init();
+            Console.WriteLine("Digite a posição X: ");
+            _posX = float.Parse(Console.ReadLine());
+            Console.WriteLine("Digite a posição Y: ");
+            _posY = float.Parse(Console.ReadLine());
+            Console.WriteLine("Digite a posição Z: ");
+            _posZ = float.Parse(Console.ReadLine());
         }
+        
 
         public void MostrarItems()
         {

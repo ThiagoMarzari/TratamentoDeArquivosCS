@@ -15,5 +15,6 @@ namespace TrabalhoFinal
             posY = random.Next(0, 100);
             posZ = random.Next(0, 100);
         }
+
     }
 }

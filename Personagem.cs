@@ -22,9 +22,9 @@ namespace TrabalhoFinal
         public int Carisma { get => _carisma; set => _carisma = value; }
 
 
-        private float _posX;
-        private float _posY;
-        private float _posZ;
+        protected float _posX;
+        protected float _posY;
+        protected float _posZ;
 
         public float PosX { get => _posX; }
         public float PosY { get => _posY; }
@@ -32,6 +32,24 @@ namespace TrabalhoFinal
 
 
         public abstract void Movimentar(float posX, float posY, float posZ); //Não possui implementação por ser um método abstrato
+
+        public void Init()
+        {
+            Helper.HeaderText("COMPLETE AS SEGUINTES INFORMAÇÕES");
+
+            Console.WriteLine("Digite o nome: ");
+            Nome = Console.ReadLine();
+            Console.WriteLine("Digite a força: ");
+            Forca = int.Parse(Console.ReadLine());
+            Console.WriteLine("Digite a estamina: ");
+            Estamina = int.Parse(Console.ReadLine());
+            Console.WriteLine("Digite a agilidade: ");
+            Agilidade = int.Parse(Console.ReadLine());
+            Console.WriteLine("Digite a inteligência: ");
+            Inteligencia = int.Parse(Console.ReadLine());
+            Console.WriteLine("Digite a carisma: ");
+            Carisma = int.Parse(Console.ReadLine());
+        }
 
         public string GetInfos()
         {

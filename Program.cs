@@ -6,15 +6,13 @@ namespace TrabalhoFinal
     {
         static void Main(string[] args)
         {
-            string nomeArquivoP, nomeArquivoI;
+            string nomeArquivo;
 
-            Console.WriteLine("Digite o nome do arquivo para os personagens: ");
-            nomeArquivoP = Console.ReadLine();
-            Arquivo arquivoP = new Arquivo("P",nomeArquivoP);
+            Console.WriteLine("Digite o nome do arquivo: ");
+            nomeArquivo = Console.ReadLine();
+            Arquivo arquivoP = new Arquivo("P", nomeArquivo);
 
-            Console.WriteLine("Digite o nome do arquivo para os itens: ");
-            nomeArquivoI = Console.ReadLine();
-            Arquivo arquivoI = new Arquivo("I", nomeArquivoI);
+            Arquivo arquivoI = new Arquivo("I", nomeArquivo);
 
             List<Item> listaItens = new List<Item>();
             List<Personagem> listaPersonagens = new List<Personagem>();
@@ -38,11 +36,14 @@ namespace TrabalhoFinal
                     PersonagemJogavel p = new PersonagemJogavel();
 
                     arquivoP.CriaArquivo();
-                    p.InitPersonagem();
+                    p.Init();
                     mensagem = p.GetInfos();
                     arquivoP.GravaMensagem(mensagem);
                     arquivoP.FecharArquivo();
                     listaPersonagens.Add(p);
+                    Console.WriteLine("Personagem adicionado!");
+                    Helper.ContinueMessage();
+                    Console.Clear();
                 }
                 else if (op == 2) //Adicionar itens na lista
                 {
@@ -55,12 +56,15 @@ namespace TrabalhoFinal
                     arquivoI.GravaMensagem(mensagem);
                     arquivoI.FecharArquivo();
                     listaItens.Add(auxItem);
+                    Console.WriteLine("Item adicionado!");
+                    Helper.ContinueMessage();
+                    Console.Clear();
                 }
                 else if (op == 3) //Mostrar personagens da lista
                 {
                     Console.Clear();
                     Helper.HeaderText("LISTA DE PERSONAGENS");
-                    try //Tentando fazer código abaixo, caso der algo errado ele vai para o catch
+                    try //Tentando rodar código abaixo, caso der algo errado ele vai para o catch
                     {
                         string[] vetorPerso = arquivoP.LerTodasLinhas();
                         Console.WriteLine(vetorPerso.Length);

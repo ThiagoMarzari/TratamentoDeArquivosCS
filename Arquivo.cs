@@ -10,7 +10,6 @@ namespace TrabalhoFinal
     {
         string nome, prefixo;
         StreamWriter sw;
-        StreamReader sr;
 
         public Arquivo(string nome, string prefixo)
         {
@@ -20,20 +19,7 @@ namespace TrabalhoFinal
 
         public void CriaArquivo()
         {
-            sw = new StreamWriter("C:\\Arquivos\\" + nome +prefixo + ".txt", true, Encoding.UTF8);
-        }
-
-        public void lerArquivo()
-        {
-            string linha;
-            sr = new StreamReader("C:\\Arquivos\\" + nome + ".txt");
-            linha = sr.ReadLine();
-            while (linha != null)
-            {
-                Console.WriteLine(linha);
-                linha = sr.ReadLine();
-            }
-            sr.Close();
+            sw = new StreamWriter("C:\\Arquivos\\" + nome + prefixo + ".txt", true, Encoding.UTF8);
         }
 
         public void GravaMensagem(string mensagem)
@@ -48,7 +34,7 @@ namespace TrabalhoFinal
 
         public string[] LerTodasLinhas()
         {
-            string[] array = File.ReadAllLines("C:\\Arquivos\\" + nome + ".txt");
+            string[] array = File.ReadAllLines("C:\\Arquivos\\" + nome + prefixo + ".txt");
             return array;
         }
     }

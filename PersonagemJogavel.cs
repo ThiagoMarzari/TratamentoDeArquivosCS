@@ -15,10 +15,9 @@ namespace TrabalhoFinal
             //TODO
         }
         
-        public void InitPersonagem()
+        public void Init()
         {
             Helper.HeaderText("COMPLETE AS SEGUINTES INFORMAÇÕES");
-            Console.WriteLine();
 
             Console.WriteLine("Digite o nome: ");
             Nome = Console.ReadLine();

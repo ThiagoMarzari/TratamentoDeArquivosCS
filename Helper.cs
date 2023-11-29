@@ -11,6 +11,7 @@ namespace TrabalhoFinal
         public static void HeaderText(string text)
         {
             Console.WriteLine("-----------" + text + "---------------");
+            Console.WriteLine();
         }
 
         public static void ContinueMessage()

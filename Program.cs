@@ -163,7 +163,7 @@ namespace TrabalhoFinal
                         continue;
                     }
                 }
-                else if (op == 5)
+                else if (op == 5) //Fechar programa
                 {
                     break;
                 }

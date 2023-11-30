@@ -25,13 +25,14 @@ namespace TrabalhoFinal
         protected float _posX;
         protected float _posY;
         protected float _posZ;
+       
 
         public float PosX { get => _posX; }
         public float PosY { get => _posY; }
         public float PosZ { get => _posZ; }
 
 
-        public abstract void Movimentar(float posX, float posY, float posZ); //Não possui implementação por ser um método abstrato
+        public abstract void Movimentar(); //Não possui implementação por ser um método abstrato
 
         public void Init()
         {

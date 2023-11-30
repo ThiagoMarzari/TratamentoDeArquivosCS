@@ -10,21 +10,20 @@ namespace TrabalhoFinal
     {
         public List<Item> Itens = new List<Item>();
 
-        public override void Movimentar(float posX, float posY, float posZ)
+        public override void Movimentar()
         {
-            //TODO
-        }
-        
-
-        public void Init() 
-        {
-            base.Init();
             Console.WriteLine("Digite a posição X: ");
             _posX = float.Parse(Console.ReadLine());
             Console.WriteLine("Digite a posição Y: ");
             _posY = float.Parse(Console.ReadLine());
             Console.WriteLine("Digite a posição Z: ");
             _posZ = float.Parse(Console.ReadLine());
+        }        
+
+        public void Init() 
+        {
+            base.Init(); //Herdando parte da função da classe pai
+            Movimentar();
         }
         
 

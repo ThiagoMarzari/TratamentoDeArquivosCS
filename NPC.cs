@@ -8,13 +8,12 @@ namespace TrabalhoFinal
 {
     public class NPC : Personagem
     {
-        public override void Movimentar(float posX, float posY, float posZ)
+        public override void Movimentar()
         {
             Random random = new Random();
-            posX = random.Next(0, 100);
-            posY = random.Next(0, 100);
-            posZ = random.Next(0, 100);
+            _posX = random.Next(0, 100);
+            _posY = random.Next(0, 100);
+            _posZ = random.Next(0, 100);
         }
-
     }
 }

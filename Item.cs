@@ -10,11 +10,11 @@ namespace TrabalhoFinal
     {
         private string _nome;
         private string _tipo;
-        private float _preco;
+        private double _preco;
 
-        public string Nome { get => _nome; }
-        public string Tipo { get => _tipo; }
-        public float Preco { get => _preco; }
+        public string Nome { get => _nome; set => _nome = value; }
+        public string Tipo { get => _tipo; set => _tipo = value; }
+        public double Preco { get => _preco; set => _preco = value; }
 
         public void Init()
         {
@@ -23,10 +23,10 @@ namespace TrabalhoFinal
             Console.WriteLine("Digite o tipo do item: ");
             _tipo = Console.ReadLine();
             Console.WriteLine("Digite o preço do item: ");
-            _preco = float.Parse(Console.ReadLine());
+            _preco = double.Parse(Console.ReadLine());
         }
 
-        public string GetInfos()
+        public string GetInfo()
         {
             return Nome + ";" + Tipo + ";" + Preco;
         }

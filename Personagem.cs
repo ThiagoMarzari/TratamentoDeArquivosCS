@@ -14,6 +14,7 @@ namespace TrabalhoFinal
         private int _agilidade;
         private int _inteligencia;
         private int _carisma;
+
         public string Nome { get => _nome; set => _nome = value; }
         public int Forca { get => _forca; set => _forca = value; }
         public int Estamina { get => _estamina; set => _estamina = value; }
@@ -21,16 +22,13 @@ namespace TrabalhoFinal
         public int Inteligencia { get => _inteligencia; set => _inteligencia = value; }
         public int Carisma { get => _carisma; set => _carisma = value; }
 
+        protected double _posX;
+        protected double _posY;
+        protected double _posZ;
 
-        protected float _posX;
-        protected float _posY;
-        protected float _posZ;
-       
-
-        public float PosX { get => _posX; }
-        public float PosY { get => _posY; }
-        public float PosZ { get => _posZ; }
-
+        public double PosX { get => _posX; }
+        public double PosY { get => _posY; }
+        public double PosZ { get => _posZ; }
 
         public abstract void Movimentar(); //Não possui implementação por ser um método abstrato
 
@@ -50,9 +48,10 @@ namespace TrabalhoFinal
             Inteligencia = int.Parse(Console.ReadLine());
             Console.WriteLine("Digite a carisma: ");
             Carisma = int.Parse(Console.ReadLine());
+            Movimentar();
         }
 
-        public string GetInfos()
+        public string GetInfo()
         {
             return Nome + ";" + Forca + ";" + Estamina + ";" + Agilidade + ";" + Inteligencia + ";" + Carisma +
                 ";" + PosX + ";" + PosY + ";" + PosZ;

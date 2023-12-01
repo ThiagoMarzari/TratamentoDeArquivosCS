@@ -8,7 +8,7 @@ namespace TrabalhoFinal
 {
     class PersonagemJogavel : Personagem
     {
-        public List<Item> Itens = new List<Item>();
+        private List<Item> _itens = new List<Item>();
 
         public override void Movimentar()
         {
@@ -25,23 +25,32 @@ namespace TrabalhoFinal
             base.Init(); //Herdando parte da função da classe pai
             Movimentar();
         }
-        
 
-        public void MostrarItems()
+        public void AddItem(Item item)
         {
-            if (Itens.Count == 0)
+            _itens.Add(item);
+        }
+
+        public void ShowItens()
+        {
+            if (_itens.Count == 0)
             {
                 Console.WriteLine("Este personagem não possui nenhum item!");
             }
             else
             {
-                Console.WriteLine("==== ITEMS ====");
-                foreach(Item item in Itens)
+                Console.WriteLine($"==== ITEMS: {Nome} ====");
+                foreach(Item item in _itens)
                 {
                     Console.WriteLine($"Nome: {item.Nome} | Tipo: {item.Tipo} | Preço: {item.Preco} ");
                 }
-                Console.WriteLine("==== ITEMS ====");
+                Console.WriteLine($"==== ITEMS: {Nome} ====");
             }
+        }
+
+        public string SaveItemList()
+        {
+            return "";
         }
     }
 }

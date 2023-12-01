@@ -8,6 +8,6 @@ namespace TrabalhoFinal
 {
     internal interface IGetInfo
     {
-        string GetInfos();
+        string GetInfo();
     }
 }

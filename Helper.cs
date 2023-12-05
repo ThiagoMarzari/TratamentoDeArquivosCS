@@ -16,6 +16,7 @@ namespace TrabalhoFinal
 
         public static void ContinueMessage()
         {
+            Console.WriteLine();
             Console.WriteLine("Pressione ENTER para continuar: ");
             Console.ReadLine();
             Console.Clear();

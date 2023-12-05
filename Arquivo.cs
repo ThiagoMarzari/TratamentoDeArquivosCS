@@ -40,36 +40,38 @@ namespace TrabalhoFinal
                 foreach (var linha in linhas)
                 {
                     string[] aux = linha.Split(';');
-                    if (aux.Length >= 3) //Verificar essa parte
+                    
+                    string tipoClasse = aux[0]; //Tipo da classe// GetType().Names
+                    string nome = aux[1];
+                    int forca = Convert.ToInt32(aux[2]);
+                    int estamina = Convert.ToInt32(aux[3]);
+                    int agilidade = Convert.ToInt32(aux[4]);
+                    int inteligencia = Convert.ToInt32(aux[5]);
+                    int carisma = Convert.ToInt32(aux[6]);
+                    double x = Convert.ToDouble(aux[7]);
+                    double y = Convert.ToDouble(aux[8]);
+                    double z = Convert.ToDouble(aux[9]);
+
+                    Personagem novoPersonagem;
+
+                    if (tipoClasse == nameof(PersonagemJogavel))
                     {
-                        string tipoPersonagem = aux[0]; //Verificar essa parte do código
-                        string nome = aux[1];
-                        int forca = Convert.ToInt32(aux[2]);
-                        int estamina = Convert.ToInt32(aux[3]);
-                        int agilidade = Convert.ToInt32(aux[4]);
-                        int inteligencia = Convert.ToInt32(aux[5]);
-                        int carisma = Convert.ToInt32(aux[6]);
-                        string pos = aux[7];
-
-                        Personagem novoPersonagem;
-
-                        if (tipoPersonagem == nameof(PersonagemJogavel))
-                        {
-                            novoPersonagem = new PersonagemJogavel { Nome = nome, Forca = forca, Estamina = estamina, Agilidade = agilidade, 
-                                Inteligencia = inteligencia, Carisma = carisma};
-                        }
-                        else if (tipoPersonagem == nameof(NPC))
-                        {
-                            novoPersonagem = new NPC { Nome = nome, Forca = forca, Estamina = estamina, Agilidade = agilidade, 
-                                Inteligencia = inteligencia, Carisma = carisma};
-                        }
-                        else
-                        {
-                            Console.WriteLine("Tipo da classe desconhecido!");
-                            continue;
-                        }
-                        listaPersonagens.Add(novoPersonagem);
+                        novoPersonagem = new PersonagemJogavel { Nome = nome, Forca = forca, Estamina = estamina, Agilidade = agilidade, 
+                            Inteligencia = inteligencia, Carisma = carisma};
+                        novoPersonagem.SetPos(x, y, z);
                     }
+                    else if (tipoClasse == nameof(NPC))
+                    {
+                        novoPersonagem = new NPC { Nome = nome, Forca = forca, Estamina = estamina, Agilidade = agilidade, 
+                            Inteligencia = inteligencia, Carisma = carisma};
+                        novoPersonagem.SetPos(x, y, z);
+                    }
+                    else //Só para garantir que não vai crashar
+                    {
+                        Console.WriteLine("Tipo da classe desconhecido!");
+                        continue;
+                    }
+                    listaPersonagens.Add(novoPersonagem);
                 }
             }
             else Console.WriteLine("Arquivo inexistente!");
@@ -84,20 +86,15 @@ namespace TrabalhoFinal
                 foreach (var linha in linhas)
                 {
                     string[] aux = linha.Split(';');
-                    if (aux.Length >= 3)
-                    {
-                        string tipoPersonagem = aux[0];
-                        string nome = aux[1];
-                        string tipo = aux[2];
-                        double preco = Convert.ToDouble(aux[3]);
-
-                        Item newItem = new Item { Nome = nome, Tipo = tipo, Preco = preco };
-
-                        listaItem.Add(newItem);
-                    }
+                    string owner = aux[1];
+                    string nome = aux[2];
+                    string tipo = aux[3];
+                    double preco = Convert.ToDouble(aux[4]);
+                    Item newItem = new Item(owner, nome, tipo, preco);
+                    listaItem.Add(newItem);
                 }
             }
-            else Console.WriteLine("Arquivo inexistente!");
+            else Console.WriteLine("Lista vazia!");
         }
         public void Close()
         {

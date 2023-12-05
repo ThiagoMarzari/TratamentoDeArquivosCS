@@ -11,9 +11,9 @@ namespace TrabalhoFinal
         public override void Movimentar()
         {
             Random random = new Random();
-            _posX = random.Next(0, 100);
-            _posY = random.Next(0, 100);
-            _posZ = random.Next(0, 100);
+            _posX = random.Next(0, 999);
+            _posY = random.Next(0, 999);
+            _posZ = random.Next(0, 999);
         }
     }
 }

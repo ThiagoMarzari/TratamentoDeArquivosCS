@@ -11,10 +11,20 @@ namespace TrabalhoFinal
         private string _nome;
         private string _tipo;
         private double _preco;
+        private string _owner; //quem é o dono desse item
 
-        public string Nome { get => _nome; set => _nome = value; }
-        public string Tipo { get => _tipo; set => _tipo = value; }
-        public double Preco { get => _preco; set => _preco = value; }
+        public Item(string owner, string nome, string tipo, double preco)
+        {
+            _owner = owner;
+            _nome = nome;
+            _tipo = tipo;
+            _preco = preco;
+        }
+
+        public string Nome { get => _nome; }
+        public string Tipo { get => _tipo; }
+        public double Preco { get => _preco;  }
+        internal string Owner { get => _owner;}
 
         public void Init()
         {
@@ -28,7 +38,7 @@ namespace TrabalhoFinal
 
         public string GetInfo()
         {
-            return Nome + ";" + Tipo + ";" + Preco;
+            return  Owner + ";" + Nome + ";" + Tipo + ";" + Preco;
         }
     }
 }

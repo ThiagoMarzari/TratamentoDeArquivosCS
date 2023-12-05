@@ -51,6 +51,13 @@ namespace TrabalhoFinal
             Movimentar();
         }
 
+        public void SetPos(double x, double y, double z)
+        {
+            _posX = x;
+            _posY = y;
+            _posZ = z;  
+        }
+
         public string GetInfo()
         {
             return Nome + ";" + Forca + ";" + Estamina + ";" + Agilidade + ";" + Inteligencia + ";" + Carisma +

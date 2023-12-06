@@ -20,15 +20,19 @@ namespace TrabalhoFinal
 
         public void CreateFile()
         {
-            sw = new StreamWriter("C:\\Arquivos\\" + nome + prefixo + ".txt", true, Encoding.UTF8);
+            sw = new StreamWriter(caminho, true, Encoding.UTF8); //Criar novo arquivo
         }
 
         public void SaveList<T>(List<T> lista) where T : IGetInfo //O T vai implementar a interface IGetInfo
         {
-            foreach (var i in lista)
+            try
             {
-                sw.WriteLine($"{i.GetType().Name};{i.GetInfo()};"); //o elemento I assume que os elementos vão ter essa interface/função implementada
+                foreach (var i in lista)
+                {
+                    sw.WriteLine($"{i.GetType().Name};{i.GetInfo()};"); //o elemento I assume que os elementos vão ter essa interface/função implementada
+                }
             }
+            catch (Exception ex) { Console.WriteLine("ERROR! " + ex); }
         }
 
         public void LoadCharacterList(List<Personagem> listaPersonagens)
@@ -68,7 +72,7 @@ namespace TrabalhoFinal
                     }
                     else //Só para garantir que não vai crashar
                     {
-                        Console.WriteLine("Tipo da classe desconhecido!");
+                        Console.WriteLine("Tipo de classe desconhecido!");
                         continue;
                     }
                     listaPersonagens.Add(novoPersonagem);
@@ -90,6 +94,7 @@ namespace TrabalhoFinal
                     string nome = aux[2];
                     string tipo = aux[3];
                     double preco = Convert.ToDouble(aux[4]);
+
                     Item newItem = new Item(owner, nome, tipo, preco);
                     listaItem.Add(newItem);
                 }

@@ -31,20 +31,15 @@ namespace TrabalhoFinal
                 if (op == 1) //Adiconar personagens na lista
                 {
                     listaPersonagens.Clear(); //Limpando a lista porque ele tava duplicando algumas linhas //Não entendi mt o pq
-                    Console.WriteLine("[1] Personagem jogavel [2] NPC");
-                    int opc = int.Parse(Console.ReadLine());
-                    Personagem p = opc == 1 ? new PersonagemJogavel() : new NPC();
+
+                    Personagem p = ChooseCharacterType();
                     p.Init();
                     listaPersonagens.Add(p);
 
-                    arquivoP.CreateFile();
-                    //arquivoP.SaveList<Personagem>(listaPersonagens); //Posso passar o tipo se quiser, assim como é o instantiate na unity
-                    arquivoP.SaveList(listaPersonagens);
-                    arquivoP.Close();
+                    CreateAndSaveFile(arquivoP, listaPersonagens);
 
                     Console.WriteLine("Personagem adicionado!");
                     Helper.ContinueMessage();
-                    Console.Clear();
                 }
                 else if (op == 2) //Adicionar itens na lista
                 {
@@ -55,28 +50,19 @@ namespace TrabalhoFinal
                     while (true)
                     {
                         listaItens.Clear();
-                        Console.WriteLine("Digite o nome do item: ");
-                        string nome = Console.ReadLine();
-                        Console.WriteLine("Digite o tipo do item: ");
-                        string tipo = Console.ReadLine();
-                        Console.WriteLine("Digite o preço do item: ");
-                        double preco = double.Parse(Console.ReadLine());
-                        Item i = new Item(p.Nome, nome, tipo, preco);
+
+                        Item i = InitItem(p);
                         listaItens.Add(i);
 
-                        arquivoI.CreateFile();
-                        arquivoI.SaveList(listaItens);
-                        arquivoI.Close();
+                        CreateAndSaveFile(arquivoI, listaItens);
 
                         Console.WriteLine("Item adicionado!");
-                        Console.WriteLine("Continuar adicionando mais itens? [SIM] [NAO]");
+                        Console.WriteLine("Continuar adicionando mais itens? [S] [N]");
                         string bOp = Console.ReadLine();
-                        if (bOp.Equals("NAO"))
+                        if (bOp.Equals("N"))
                         {
                             Helper.ContinueMessage();
-                            Console.Clear();
                             break;
-                            
                         }
                         Console.Clear();
                         continue;
@@ -84,26 +70,11 @@ namespace TrabalhoFinal
                 }
                 else if (op == 3) //Mostrar personagens da lista
                 {
-                    Console.Clear();
                     Helper.HeaderText("LISTA DE PERSONAGENS");
 
                     listaPersonagens.Clear();
                     arquivoP.LoadCharacterList(listaPersonagens);
-                    
-                    foreach (var per in listaPersonagens)
-                    {
-                        Console.Write("Nome:" + per.Nome + " | ");
-                        Console.Write("Força: " + per.Forca + " | ");
-                        Console.Write("Estamina: " + per.Estamina + " | ");
-                        Console.Write("Agilidade: " + per.Agilidade + " | ");
-                        Console.Write("Inteligência: " + per.Inteligencia + " | ");
-                        Console.Write("Carisma: " + per.Carisma + " | ");
-                        Console.Write("Pos X: " + per.PosX + " | ");
-                        Console.Write("Pos Y: " + per.PosY + " | ");
-                        Console.Write("Pos Z: " + per.PosZ);
-
-                        Console.WriteLine();
-                    }
+                    ShowAllCharacterInfo(listaPersonagens);
 
                     Helper.ContinueMessage();
                 }
@@ -112,32 +83,29 @@ namespace TrabalhoFinal
                     Personagem p = ChooseCharacter(listaPersonagens, arquivoP);
                     if (p == null) continue;
 
-                    Console.Clear();
                     Helper.HeaderText("LISTA DE ITENS");
 
                     try
                     {
                         listaItens.Clear();
                         arquivoI.LoadItemList(listaItens);
+
                         Console.WriteLine("DONO: " + p.Nome);
                         Console.WriteLine();
+
                         foreach (var item in listaItens)
                         {
                             if (p.Nome == item.Owner)
                             {
-                                Console.Write("Nome:" + item.Nome + " | ");
-                                Console.Write("Tipo:" + item.Tipo + " | ");
-                                Console.Write("Preço:" + item.Preco + " | ");
-
+                                ShowItemInfo(item);
                                 Console.WriteLine();
                             }
                         }
-                        
                         Helper.ContinueMessage();
                     }
                     catch (Exception ex)
                     {
-                        Console.WriteLine("Error!!");
+                        Console.WriteLine("Error!!" + ex);
                         Helper.ContinueMessage();
                     }
                 }
@@ -148,13 +116,74 @@ namespace TrabalhoFinal
             }
         }
 
+        private static void ShowItemInfo(Item item)
+        {
+            Console.Write("Nome:" + item.Nome + " | ");
+            Console.Write("Tipo:" + item.Tipo + " | ");
+            Console.Write("Preço:" + item.Preco);
+        }
+
+        private static void ShowAllCharacterInfo(List<Personagem> listaPersonagens)
+        {
+            foreach (var per in listaPersonagens)
+            {
+                Console.Write("Nome:" + per.Nome + " | ");
+                Console.Write("Força: " + per.Forca + " | ");
+                Console.Write("Estamina: " + per.Estamina + " | ");
+                Console.Write("Agilidade: " + per.Agilidade + " | ");
+                Console.Write("Inteligência: " + per.Inteligencia + " | ");
+                Console.Write("Carisma: " + per.Carisma + " | ");
+                Console.Write("Pos X: " + per.PosX + " | ");
+                Console.Write("Pos Y: " + per.PosY + " | ");
+                Console.Write("Pos Z: " + per.PosZ);
+
+                Console.WriteLine();
+            }
+        }
+
+        static Personagem ChooseCharacterType()
+        {
+            Console.WriteLine("[1] Personagem jogavel [2] NPC");
+            int opc = int.Parse(Console.ReadLine());
+            return opc == 1 ? new PersonagemJogavel() : new NPC();
+        }
+
+        static Item InitItem(Personagem p)
+        {
+            Console.WriteLine("Digite o nome do item: ");
+            string nome = Console.ReadLine();
+            Console.WriteLine("Digite o tipo do item: ");
+            string tipo = Console.ReadLine();
+            Console.WriteLine("Digite o preço do item: ");
+            double preco = double.Parse(Console.ReadLine());
+            Item i = new Item(p.Nome, nome, tipo, preco);
+            return i;
+        }
+
+        static void CreateAndSaveFile<T>(Arquivo a, List<T> lista) where T : IGetInfo
+        {
+            try
+            {
+                a.CreateFile();
+                //arquivoP.SaveList<Personagem>(listaPersonagens); //Posso passar o tipo se quiser, assim como é o instantiate na unity
+                a.SaveList(lista);
+                a.Close();
+            }
+            catch (Exception ex) { Console.WriteLine("ERROR" + ex); }
+        }
+
         static Personagem ChooseCharacter(List<Personagem> listaPersonagens, Arquivo arquivoP)
         {
             Helper.HeaderText("PERSONAGENS DISPONÍVEIS");
             listaPersonagens.Clear();
             arquivoP.LoadCharacterList(listaPersonagens);
 
-            Console.WriteLine("Escolha qual dos personagens: ");
+            if (listaPersonagens.Count == 0)
+            {
+                Helper.ContinueMessage();
+                return null;
+            }
+
             foreach (var per in listaPersonagens)
             {
                 if (per is PersonagemJogavel)//Ver se o tipo da classe é do tipo PersonagemJogavel

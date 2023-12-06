@@ -10,6 +10,7 @@ namespace TrabalhoFinal
     {
         public static void HeaderText(string text)
         {
+            Console.Clear();
             Console.WriteLine("-----------" + text + "---------------");
             Console.WriteLine();
         }

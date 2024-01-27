@@ -16,6 +16,17 @@ namespace TrabalhoFinal
             this.nome = nome;
             this.prefixo = prefixo;
             caminho = "C:\\Arquivos\\" + nome + prefixo + ".txt";
+
+            CreateFolder();
+        }
+
+        public void CreateFolder()
+        {
+            string path = "C:\\Arquivos\\";
+            if (!Directory.Exists(path))
+            {
+                Directory.CreateDirectory(path);
+            }
         }
 
         public void CreateFile()
